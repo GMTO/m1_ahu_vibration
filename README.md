@@ -2,7 +2,7 @@
 
 This repository provides scripts developed to assess M1 AHU (air handling unit) vibration data and its effect on the telescope performance.
 
-The main scripts are (this version is before the November 2025 updates):
+The main scripts are (**the version in the pre-mount-fdr branch is before the November 2025 updates**):
 - `plot_lc_locations.mlx`: plots the load cell locations used to measure the AHU vibration forces.
 - `proc_ahu_lc_dt.mlx`: plots the AHU force data and calculates the vibration force power spectrum density (PSD). Besides plotting and reporting relevant information regarding the vibration data, the last cell of the script enables the user to save the PSD data so that it can be used in further analysis (see `m1_ahu_vib_analysis.mlx`)
 - `compute_m1fan_rtf.mlx`: computes the frequency response of the telescope transfer function from the forces applied at the M1 fan locations to the segment tipt-tilt and piston at the exit pupil. Those data are crucial to estimate the impact of the vibration forces in the telescope performance.
