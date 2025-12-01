@@ -1,3 +1,10 @@
+# Input data files
 m1s*fanTF*.mat
 ahu*_1400rpm.mat
+
+# TF compressed file
 *_TFs.zip
+
+# FR files
+G_2025*.mat
+ahu2WFE_*_TFs.mat
