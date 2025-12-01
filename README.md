@@ -1,10 +1,9 @@
-# M1 AHU Vibration Analysis Scripts
+# Repository with scripts to calculate the M1 AHU transfer functions
 
-This repository provides scripts developed to assess M1 AHU (air handling unit) vibration data and its effect on the telescope performance.
+The script `calc_m1ahu_tfs.mlx` combines a state-space model representing the GMT's structural dynamics, the mount axes feedback controller transfer functions, optical sensitivity matrices, and rejection transfer functions to obtain the frequency responses between AHU force (and torque) inputs and segment tip-tilt and piston, and corresponding wavefront error at the exit pupil. The goal is to provide a transfer function matrix representing the telescope's sensitivity to forces applied to nodes at the M1 AHU (air handling units) locations.
+The script to calculate the M1 AHU frequency responses relies on the following data files:
+- `odc_fdr2023_z30_o`: It provides a struct object "o" with mount subsystem models, including the mount controller transfer functions.
+- `lom_tt_dt` and `D_seg_piston_dt`: Those files provide linear approximations of the transformations from the M1 and M2 rigid-body motions to segment tip-tilt and piston at the telescope exit pupil.
+- `modal_state_space_model_2ndOrder`: The file contains the telescope structural dynamics model represented in the second-order modal form. The variable `modelDescription` provides a detailed description of the model.
 
-The main scripts are:
-- `plot_lc_locations.mlx`: plots the load cell locations used to measure the AHU vibration forces.
-- `proc_ahu_lc_dt.mlx`: plots the AHU force data and calculate the vibration force power spectrum density (PSD). Besides plotting and reporting relevant information regarding the vibration data, the last cell of the script enables the user to save the PSD data so that it can be used in further analysis (see `m1_ahu_vib_analysis.mlx`)
-- `compute_m1fan_rtf.mlx`: computes the frequency response of the telescope transfer function from the forces applied at the M1 fan locations to the segment tipt-tilt and piston at the exit pupil. Those data are crucial to estimate the impact of the vibration forces in the telescope performance.
-- `m1_ahu_vib_analysis.mlx`: provides an estimate of the wavefront error induced by the M1 AHU vibration forces. The script employs the frequency response of the telescope transfer function matrix (`compute_m1fan_rtf.mlx`) and the PSD of AHU vibration forces. Pre-computed frequency response files and AHU vibration PSD data are available on DROBO (`smb://Drobo-IM.gmto.org/im/Integrated Modeling/IM-studies/m1_ahu_vib/`).
-- `m1_ata_vib_analysis.mlx`: provides tip-tilt and piston responses to white-noise inputs applied to the M1 AHU nodes. The script employs pre-computed frequency response of the telescope transfer function matrix (`m1sXfanTF_4ataPSD.mat`). Those pre-computed frequency response files are also available on DROBO (`smb://Drobo-IM.gmto.org/im/Integrated Modeling/IM-studies/m1_ahu_vib/`). At last, the script computes the wavefront error impact due to the forces computed by ATA in 2018. The PSD of the AHU vibration data computed by ATA is available from file `Papst1_10.csv` saved at the same folder.
+After running the script, the state-space model matrices are saved as `G_20251110_1617z30zeta<.>pct_ahu_ss.mat`, and the output data `G_20251110_1617z30zeta<.>pct_ahu_fr.mat` file provides the frequency response model for each observing mode: `H_NS_ttp`, `H_NGAO_ttp`, and `H_LTAO_ttp`.
