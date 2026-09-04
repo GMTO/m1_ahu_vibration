@@ -1,7 +1,19 @@
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+% HOW TO USE THIS SCRIPT:
 %
+% 1. Ensure the input data file ('fan_wrench_reconstructed_psd_timeseries_60sec.mat')
+%    containing 'timeseriesAHUfm', 'time', 'psdAHUf', and 'freq' is in your path.
+% 2. Adjust user controls at the top: set 'save_psd = true' to export output data, 
+%    or 'rm_freq_pts = true' to restrict analysis to 10–200 Hz.
+% 3. Run the script to calculate 6x6 PSD matrices via Welch's method, check and 
+%    regularize Hermitian positive semi-definiteness, and output diagnostic 
+%    plots for PSD comparison and cross-channel coherence.
 %
+%   Sep, 2026 - Rodrigo A. Romano
 %
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
+%#ok<*UNRCH> 
 clearvars
 % Save PSD into a MATLAB data file
 save_psd = false;
